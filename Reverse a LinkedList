@@ -1,0 +1,74 @@
+//DAY-1 4 AUG 2024
+// Reverse a LL
+// Brute force approach
+class Solution {
+    public ListNode reverseList(ListNode head) {
+        ListNode temp = head;
+        int size = 0;
+        while(temp!=null){
+            size++;
+            temp=temp.next;
+        }
+        temp = head;
+        int i=size-1;
+        int arr[] = new int[size];
+        while(temp!=null){
+            arr[i--]=temp.val;
+            temp=temp.next;
+        }
+
+        ListNode newHead = new ListNode(0);
+        ListNode tail = newHead;
+        for(i=0;i<arr.length;i++){
+           tail.next = new ListNode(arr[i]);
+           tail=tail.next;
+        }
+        return newHead.next;
+    }
+}
+
+
+Time Complexity:O(n)
+Space Complexity:O(n)
+
+
+// Recursive Approach
+class Solution {
+    public ListNode reverseList(ListNode head) {
+        // for 1 and 0 node
+        if(head==null && head.next==null){
+            return head;
+        }
+
+        ListNode newHead = reverseList(head.next);
+        ListNode front = head.next;
+        front.next = head;
+        head=null;
+        return newHead;
+    }
+}
+
+
+Time Complexity:O(n)
+Space Complexity:O(n)
+
+
+// Iterative Approach
+class Solution {
+    public ListNode reverseList(ListNode head) {
+        ListNode prev = null;
+        ListNode temp = head;
+        while(temp!=null){
+            ListNode front = temp.next;
+            temp.next = prev;
+            prev = temp;
+            temp = front;
+        }
+        return prev;
+    }
+}
+
+
+Time Complexity:O(n)
+Space Complexity:O(1)
+
